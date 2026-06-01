@@ -1,0 +1,46 @@
+{
+    "workshoptitle": "Autonomous AI Lakehouse: Unlocking Enterprise Data for AI & Analytics (ODTUG Kscope26)",
+    "help": "livelabs-help-db_us@oracle.com",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "type": "freetier",
+            "description": "Introduction to the Kscope26 Autonomous AI Lakehouse workshop.",
+            "filename": "./../../introduction/introduction-kscope26.md"
+        },
+        {
+            "title": "Get Started",
+            "description": "This is the prerequisites for customers using Free Trial and Paid tenancies.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
+        },
+        {
+            "title": "Lab 1: Set up the Workshop Environment",
+            "type": "freetier",
+            "description": "Review and prepare the Oracle Cloud and Autonomous AI Database environment for the workshop.",
+            "filename": "./../../setup-workshop-environment/setup-workshop-environment.md"
+        },
+        {
+            "title": "Lab 2: Load Local Data",
+            "type": "freetier",
+            "description": "Load local files into Oracle Autonomous AI Database for analysis.",
+            "filename": "./../../load-local-data/load-local-data.md"
+        },
+        {
+            "title": "Lab 3: Analyze Data with Table AI Assist",
+            "type": "freetier",
+            "description": "Use Table AI Assist to enrich and prepare data. AI feature steps will be presented as a live demo.",
+            "filename": "./../../table-ai-assist/table-ai-assist.md"
+        },
+        {
+            "title": "Lab 4: Analyze Data with the Excel Add-in",
+            "type": "freetier",
+            "description": "Install and use the Autonomous AI Database Excel Add-in. AI feature steps will be presented as a live demo.",
+            "filename": "./../../adb-excel-addin/adb-excel-addin.md"
+        },
+        {
+            "title": "Need Help?",
+            "description": "Solutions to common problems and directions for receiving LiveLabs help.",
+            "filename": "https://oracle-livelabs.github.io/common/labs/need-help/need-help-freetier.md"
+        }
+    ]
+}
