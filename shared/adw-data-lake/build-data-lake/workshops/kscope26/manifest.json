@@ -1,6 +1,15 @@
 {
     "workshoptitle": "Autonomous AI Lakehouse: Unlocking Enterprise Data for AI & Analytics (ODTUG Kscope26)",
     "help": "livelabs-help-db_us@oracle.com",
+    "include": {
+        "iam-compartment-create-body.md": "/common/building-blocks/tasks/iam/compartment-create-body.md",
+        "adb-goto-service-body.md": "/common/building-blocks/tasks/adb/goto-service-body.md",
+        "adb-provision-data-sharing-lake-task.md": "/common/building-blocks/tasks/adb/provision-data-sharing-lake-task.md",
+        "adb-connect-with-sql-worksheet-body.md": "/common/building-blocks/tasks/adb/connect-with-sql-worksheet-body.md",
+        "connect-with-sql-worksheet-non-admin.md": "/common/building-blocks/tasks/adb/connect-with-sql-worksheet-non-admin.md",
+        "adb-generate-rsa-key-pair.md": "/common/building-blocks/tasks/adb/generate-rsa-key-pair.md"
+    },
+    "variables": ["./variables.json"],
     "tutorials": [
         {
             "title": "Introduction",
@@ -16,8 +25,8 @@
         {
             "title": "Lab 1: Set up the Workshop Environment",
             "type": "freetier",
-            "description": "Review and prepare the Oracle Cloud and Autonomous AI Database environment for the workshop.",
-            "filename": "./../../setup-workshop-environment/setup-workshop-environment.md"
+            "description": "This lab walks you through the required and optional tasks to set up your workshop environment.",
+            "filename": "/common/building-blocks/blocks/adb/provision/provision-data-sharing-lake-block.md"
         },
         {
             "title": "Lab 2: Load Local Data",
