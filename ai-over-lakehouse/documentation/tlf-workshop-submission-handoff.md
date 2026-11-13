@@ -1,0 +1,468 @@
+# PeakGear Workshop — TLF Submission Handoff
+
+Estimated Time: Reference only; not a timed learner task.
+
+### Objectives
+
+Provide the workshop submission metadata, current learner path, and publication handoff.
+
+## Purpose of this document
+
+Use this file as the canonical metadata and positioning source when entering
+the workshop into TLF or another Oracle workshop-registration system. The
+learner content is in this same folder.
+
+Do not infer capabilities or rewrite the lab from older PeakGear drafts. The
+current decisions in this document override earlier versions.
+
+## Canonical workshop identity
+
+| Field | Copy-ready value |
+|---|---|
+| Workshop title | PeakGear: From Raw Sources to Governed Answers with Codex |
+| Short title | PeakGear AI Lakehouse with Codex |
+| Subtitle | Connect live Oracle and Databricks data, add business meaning, and build one governed Analytic View |
+| Workshop slug | peakgear-codex-semantic-lakehouse |
+| Delivery type | Hands-on workshop |
+| Experience level | Intermediate |
+| Duration | 75 minutes |
+| Hands-on time | 60 minutes |
+| Troubleshooting and discussion buffer | 15 minutes |
+| Content language | English |
+| Industry scenario | Retail and consumer products |
+| Primary product | Oracle AI Lakehouse |
+| Primary interface | Oracle Data Studio |
+| AI client | Codex Desktop through Oracle Data Studio MCP |
+
+Workshop ID, event code, lab owner, capacity, cost, target region, and
+availability dates are not yet assigned. Leave those fields as TBD rather
+than inventing values.
+
+## One-line value proposition
+
+Turn connected Oracle operational data and Databricks Iceberg data into one
+governed business answer with reviewed local snapshots and a reusable semantic
+model.
+
+## Short description
+
+Connect Databricks Unity/Iceberg and an existing Oracle operations database to
+Oracle AI Lakehouse. Use Data Studio AI Enrichment and Codex through MCP to
+turn a vague product-interest question into one governed Analytic View and an
+explainable cross-source recommendation.
+
+## Long description
+
+PeakGear has product and digital-interaction data in Databricks Unity Catalog
+and operational return events in an existing Oracle database. The systems are
+connected, but their raw fields do not define what customer interest means,
+which time period should be compared, or how digital behavior and returns
+should be aggregated.
+
+Participants first open their prepared LiveLabs reservation, use its assigned
+database credentials, and connect both live sources to Oracle AI Lakehouse.
+They then connect Codex through the
+Oracle Data Studio MCP server and ask a simple business question. Codex
+correctly refuses to invent a ranking from raw objects. Participants use Data
+Studio AI Enrichment to review and save the business meaning of the data, then
+repeat the same question and receive a better, annotation-backed answer.
+
+For the final cross-source question, Codex identifies that descriptions and
+tags alone are not a governed multidimensional model. Through MCP, Codex
+creates or reuses and validates one Analytic View with common time, product,
+category, and aggregation semantics through explicit SQL DDL in adp_run_query.
+The two facts are aggregated independently by product/month before combination,
+and both SUM measures are reconciled for the latest shared completed month.
+The final answer ranks product categories using source-period
+digital interest and returned units, with repeatable product-level drill-down
+and explicit limitations.
+
+PeakGear is a fictional sporting goods retailer. The workshop demonstrates
+Oracle AI Lakehouse as an AI-powered query hub across existing Oracle and
+Databricks data, with Data Studio as the primary
+user experience and Codex as the AI client.
+
+## Catalog abstract
+
+Can an AI assistant answer a business question simply because it can connect
+to several data systems? In this hands-on workshop, participants connect live
+Databricks Iceberg data and an existing Oracle operations database to Oracle
+AI Lakehouse. They observe the limits of raw-data reasoning, add reviewed
+business context with Data Studio AI Enrichment, and use Codex through MCP to
+create or reuse and validate one governed Analytic View. The result is an explainable category
+recommendation built on reusable time, hierarchy, and aggregation rules.
+
+## Customer problem
+
+The customer already has the necessary data, but it is distributed across
+systems and described technically rather than in shared business terms:
+
+* Databricks contains the product catalog and high-volume digital clickstream.
+* An existing Oracle database contains operational return events.
+* AI clients can reach data, but connectivity alone does not define measures,
+  grain, time alignment, hierarchies, joins, or approved aggregations.
+* One-off generated SQL can produce plausible but inconsistent answers.
+
+The business question is:
+
+> Which product categories should we prioritize, balancing current customer
+> interest with returns?
+
+## Oracle AI Lakehouse value demonstrated
+
+* Connects live Oracle and Databricks/Iceberg sources without creating a
+  separate learner-built staging pipeline.
+* Uses Data Studio as the visual place to connect sources and review AI-assisted
+  business metadata.
+* Persists reviewed descriptions and tags as native database annotations.
+* Uses Analytic Views to govern measures, hierarchies, grain, and drill-down.
+* Gives Codex task-oriented MCP access as PEAKGEAR_USER, not an administrator
+  database account. Source credentials are stored in the database, not passed
+  as MCP launcher arguments.
+* Keeps the final answer reproducible and explicit about its limitations.
+
+## Target audience
+
+### Primary audience
+
+* Data engineers integrating Oracle and Databricks data.
+* Database administrators and Autonomous Database practitioners.
+* Analytics engineers and semantic-model designers.
+* Data and AI architects evaluating governed agent access.
+* AI application developers using MCP-based data tools.
+* Oracle solution engineers and technical field teams.
+
+### Secondary audience
+
+* Technical product managers.
+* Technical business analysts who understand basic database concepts.
+* Retail analytics practitioners evaluating product-interest and returns use
+  cases.
+
+### Not the primary audience
+
+This is not a no-code business-user workshop. Participants select provisioned
+source credentials and perform catalog-mount, SQL, and MCP setup steps. Database
+administration and credential provisioning are provider tasks.
+
+## Recommended prior knowledge
+
+Participants should be comfortable with:
+
+* basic SQL concepts;
+* database users and privileges;
+* tables, views, and aggregations;
+* the purpose of OAuth credentials; and
+* basic use of a desktop AI assistant.
+
+Prior experience with Oracle Analytic Views, Iceberg internals, Python, or
+manual MCP configuration is not required.
+
+## Participant prerequisites
+
+* A macOS laptop with Terminal or a Windows laptop with Windows PowerShell
+  5.1 or later. Separate setup and maintenance scripts are included.
+* Codex installed, signed in, and able to create a local task. The event
+  organizer arranges supported client installation and account access before
+  the workshop; the reservation does not include a Codex account.
+* A modern browser.
+* Internet access.
+* An active, ready LiveLabs reservation with OCI Login Credentials, Tenancy
+  Information, and Environment Details. Database User and Database Password
+  come from Environment Details, not screenshots or OCI Login Credentials.
+* The database-specific ADP_URL obtained by running the read-only query in
+  Lab 3, Task 1 as PEAKGEAR_USER in Data Studio. The provider validates access
+  before release.
+* DBX_PEAKGEAR_OAUTH and ADLS_PEAKGEAR_DATA already provisioned for
+  PEAKGEAR_USER. The public
+  [Connection field reference](../assets/event-lab-values.md) lists the saved
+  credential names and endpoint. Learners do not enter source secrets.
+
+## Environment prerequisites
+
+The workshop environment must provide:
+
+* an assigned Oracle AI Lakehouse database with PEAKGEAR_USER, required grants,
+  and ORDS / Database Actions access already enabled;
+* an existing Oracle operations database exposing CUSTOMER_RETURN_EVENTS;
+* a Databricks Unity Catalog endpoint exposing ICEBERG.PRODUCTS and
+  ICEBERG.DIGITAL_CLICKSTREAM_EVENTS;
+* network access from the lab database to the Databricks OAuth endpoint;
+* the public PEAKGEAR_OPERATIONS_LINK already provisioned;
+* OCI Resource Principal and required IAM policy;
+* a default NL2SQL AI profile that supports Data Studio AI Enrichment; and
+* the project-scoped PeakGear LiveLab MCP starter kit.
+
+The default AI profile is created before the workshop. Participants do not
+create or edit an AI profile. They may check that the profile named in their
+reservation is present; this is not a profile-configuration task.
+
+## What participants do
+
+This is the current hands-on boundary:
+
+1. Start at Lab 1 and read their own LiveLabs Reservation Information,
+   distinguishing OCI login from database login.
+2. Connect Data Studio to the assigned database with Environment Details and
+   verify the participant identity.
+3. Confirm the two provisioned source credentials in Data Studio.
+4. Use Data Studio UI to mount the Databricks Unity/Iceberg catalog.
+5. Preview five rows from each live source, then create three
+   user-owned local raw snapshot tables for products, digital intent, and
+   returns. Validate product keys locally before analytics.
+6. In Lab 3, obtain ADP_URL with the provided SQL query, then download the
+   single Starter Kit and configure the project-scoped LiveLab MCP connection
+   using ADP_URL and the reservation's Database Password. No ADMIN login is
+   needed.
+7. Ask a simple raw-data question and observe a controlled stop.
+8. Use Data Studio AI Enrichment to review and save descriptions and tags.
+9. Repeat the same question and observe the improved answer.
+10. In Lab 5, ask a harder cross-source question and identify the governed-model gap.
+11. In the same lab and Codex task, paste the short authorized build request
+    to create or reuse and validate one AV through explicit MCP SQL DDL. All
+    standing rules are established once in Lab 3 Task 2, not repeated here.
+12. Ask the final question and review the governed category and product
+    drill-down.
+
+## What is preconfigured
+
+* The Oracle AI Lakehouse database exists.
+* PEAKGEAR_USER, its reservation-specific password, required grants, ORDS
+  enablement, and the Databricks network ACL are provisioned.
+* The Oracle operations database exists and contains the lab data.
+* The public Operations database link is provisioned and accessible to the user.
+* The Databricks Unity Catalog and Iceberg tables exist.
+* OCI IAM and Resource Principal infrastructure are available.
+* The default Data Studio AI profile exists.
+* The source datasets are populated.
+
+These are provider responsibilities completed before the reservation is ready.
+There is no learner ADMIN setup. Repair provisioning failures rather
+than asking participants to repeat administration steps.
+
+## Learning objectives
+
+After completing the workshop, participants can:
+
+1. Explain why source connectivity is not the same as shared business
+   semantics.
+2. Connect Databricks Unity/Iceberg and an existing Oracle database to Oracle
+   AI Lakehouse.
+3. Use Data Studio AI Enrichment to review and persist business metadata.
+4. Distinguish annotations from governed measures, hierarchies, and
+   aggregations.
+5. Connect Codex to Data Studio through a bounded MCP configuration.
+6. Use a controlled AI stop to identify missing business definitions.
+7. Create or reuse and validate one Analytic View through Codex and MCP SQL.
+8. Produce an explainable cross-source answer with a reusable drill-down.
+
+## Workshop outline
+
+| Lab | Title | Duration |
+|---:|---|---:|
+| 1 | Sign in as PEAKGEAR_USER | 5 minutes |
+| 2 | Connect real Oracle and Databricks sources | 15 minutes |
+| 3 | Connect Codex and ask the raw-data question | 8 minutes |
+| 4 | Add business meaning with Data Studio AI Enrichment | 12 minutes |
+| 5 | Identify the model gap, create an Analytic View with Codex, and answer the question | 20 minutes |
+| Buffer | Troubleshooting and discussion | 15 minutes |
+| Total |  | 75 minutes |
+
+AI Enrichment is performed only in Lab 4, where participants review and save
+the descriptions and tags for all three raw tables. Lab 5 reuses those saved
+annotations for the harder question, identifies the model requirements, builds
+and validates one Analytic View, and answers the final question in one module.
+It does not repeat enrichment.
+
+## Business questions used in the workshop
+
+### Question 1 — before and after enrichment
+
+> Which products are customers interested in right now?
+
+The exact same question is asked twice:
+
+* Before enrichment, Codex stops because interest, grain, time, and display
+  semantics are undefined.
+* After enrichment, Codex returns the latest-completed-month product ranking
+  using the reviewed digital-event definition.
+
+### Question 2 — before and after the Analytic View
+
+> Which product categories should we prioritize, balancing current customer
+> interest with returns?
+
+* Before a validated Analytic View, Codex identifies the missing common time window,
+  category hierarchy, additive measures, and governed drill-down.
+* After validation, Codex returns the category recommendation with product
+  evidence and explicit return context.
+
+## Products, features, and technologies
+
+* Oracle AI Lakehouse
+* Oracle Data Studio
+* Oracle Database Links
+* Oracle Analytic Views
+* Oracle database annotations
+* Oracle Data Studio MCP Server
+* OCI Resource Principal
+* Databricks Unity Catalog
+* Apache Iceberg
+* Azure Blob Storage
+* Codex Desktop
+
+## Suggested categories
+
+Use the closest available TLF categories:
+
+* Database
+* Data Lakehouse
+* Data Integration
+* Analytics
+* Generative AI
+* AI Agents and MCP
+* Multicloud
+* Retail
+
+## Suggested keywords and tags
+
+Oracle AI Lakehouse, Data Studio, Databricks, Unity Catalog, Apache Iceberg,
+database link, Analytic Views, semantic layer, annotations, Codex,
+MCP, governed AI, retail analytics, product popularity, digital intent,
+returns analysis, cross-source analytics.
+
+## Success criteria
+
+The workshop is successful when:
+
+* PEAKGEAR_USER can read both mounted Iceberg tables and the Operations table;
+* Codex confirms the bounded PEAKGEAR_USER MCP session;
+* the first raw question produces a controlled stop;
+* AI Enrichment metadata is saved and visible in Data Studio;
+* the repeated simple question produces the defined latest-month ranking;
+* the harder question identifies the need for a governed model;
+* one AV created or reused by Codex is valid and queryable, with both SUM
+  measures reconciled for the latest shared completed month and no prescribed
+  object names; and
+* the final answer uses the common period, digital-event count, and returned
+  units without inventing revenue, sales, or return rate.
+
+## Deliberate non-goals
+
+* The workshop does not calculate sales, revenue, margin, or return rate.
+* Digital interest means digital-event count, not orders or unique customers.
+* Returned units are quality context, not a rate, because shipped-unit volume
+  is not present.
+* Local raw and supporting tables are workshop snapshots, not a continuously
+  refreshed production ingestion pipeline.
+* The lab does not teach manual TOML editing, Python setup, or direct MCP
+  server administration.
+* The lab does not grant DBA or broad ANY privileges to PEAKGEAR_USER.
+* Participants do not provision users, grants, ORDS, ACLs, database links, or
+  AI profiles, and do not log in as ADMIN.
+* Data caching is temporarily excluded from this version of the workshop.
+
+## Event values and publication notes
+
+* Publish only public endpoints and credential aliases. Azure SAS tokens,
+  concrete Databricks client IDs, client secrets, and passwords must not appear
+  in text, SQL, screenshots, or ZIPs. The OAuth credential screenshot that
+  displayed a client ID has been withdrawn.
+* Provisioning prerequisite: create DBX_PEAKGEAR_OAUTH and ADLS_PEAKGEAR_DATA
+  for PEAKGEAR_USER before the reservation is ready. Source secrets remain in
+  the private provider workflow. See [provisioning.md](provisioning.md).
+* Do not add ADMIN login details, unrelated secrets, or OCI API private keys.
+* Do not publish reservation database or OCI passwords. The Lab 1 environment
+  screenshot is explicitly a password-redacted illustration; its other values
+  are examples, not credentials that all participants should use.
+* The MCP launcher does not require the Azure storage password or Databricks
+  client secret; it uses PEAKGEAR_USER to access the prepared database objects.
+* Codex connects as PEAKGEAR_USER, not ADMIN.
+* The public Operations database link is provisioned before the reservation is
+  ready and copied into the participant-owned raw returns table in Lab 2.
+* Run the Lab 3 Task 1 ADP_URL lookup as PEAKGEAR_USER. Before release, the
+  provider validates that this read-only query succeeds; participants do not
+  switch to ADMIN if it fails.
+  Review unrelated database names, compartments, and tenant labels before
+  external publication. Service owners must revoke/rotate previously exposed
+  credentials and audit access before reuse; removing the current values does
+  not purge Git history.
+
+## Current content status
+
+Completed:
+
+* Five learner modules, numbered Labs 1–5, and a sandbox manifest starting at Lab 1.
+* Provider-only provisioning boundary; legacy operator SQL is not a learner task.
+* Event-values reference and SQL alternative to the Data Studio source mount.
+* Project-scoped Codex MCP starter kit.
+* LiveLabs reservation examples, with the database password redacted, and
+  Data Studio credential, Unity mount, catalog, and AI Enrichment screenshots.
+* Codex screenshots for raw stop, improved simple answer, and final governed
+  answer.
+
+Still required before publication:
+
+* Data Studio Catalog screenshot after the reviewed annotations are saved.
+* Codex screenshot explaining the governed-model gap.
+* Codex screenshot creating or reusing and validating one AV with both SUM measures.
+* Final end-to-end dry run in the target event environment.
+* Verification that adp_run_query in the target Data Studio MCP release can
+  execute the explicit SQL DDL required by the one-AV workflow. Do not use
+  adp_build_analytic_view or exploratory AVs as a fallback.
+
+## Known evidence boundaries
+
+* Data Studio descriptions and tags are annotations. They improve context but
+  do not themselves enforce joins, measures, hierarchies, or aggregation.
+* Analytic Views provide the governed multidimensional contract used in the
+  final stage.
+* A visible AI profile or AI Profile ready badge is not sufficient runtime
+  proof; AI Enrichment and the actual Codex MCP path must work in the dry run.
+* Codex-generated Analytic View creation remains a publication gate until it
+  succeeds with the target MCP release.
+
+## Source files
+
+| Purpose | Relative path |
+|---|---|
+| Workshop entry | documentation/readme.md |
+| Existing workshop metadata | documentation/workshop-details.md |
+| Release checklist | documentation/author-review.md |
+| Screenshot mapping | documentation/traceability.md |
+| Sandbox manifest | workshops/sandbox/manifest.json |
+| Provider-only provisioning reference | documentation/provisioning.md; scripts/00-admin-setup.sql |
+| Codex starter kit | starter-kit/ |
+| Learner modules | connect-peakgear/, connect-sources/, connect-codex/, ai-enrichment/, analytic-views/ |
+
+## Instructions for the next Codex agent
+
+When using this document to populate TLF:
+
+1. Preserve the canonical title, short description, long description, audience,
+   duration, prerequisites, learning objectives, and outline unless the user
+   explicitly requests a rewrite.
+2. Map these definitions to the actual TLF field names; do not invent missing
+   event IDs, dates, owners, capacities, costs, or regions.
+3. If a field has a character limit, produce a shorter variant while
+   preserving the customer problem, the two live sources, Data Studio,
+   governed Analytic Views, and Codex through MCP.
+4. Do not add AI Profile creation to the participant flow. The default profile
+   is preconfigured.
+5. Start at Lab 1 and preserve numbering 1–5. Never restore participant ADMIN
+   setup or use example screenshot passwords for a live reservation.
+6. Do not replace Codex-created Analytic Views with learner copy-and-paste DDL
+   unless the user explicitly chooses the fallback path.
+7. Do not describe annotations as constraints or guaranteed joins.
+8. Do not claim sales, revenue, margin, return rate, or data-caching performance
+   that the lab does not prove.
+9. Publish no source credentials, reservation passwords, personal credentials,
+   or unrelated secrets. Use the private View Login Info fields and label
+   reservation screenshots as illustrative examples.
+10. Use the files listed above as the source of truth for final links and
+    current readiness.
+
+## Acknowledgements
+
+* **Author** - Oracle AI Lakehouse workshop team
+* **Last Updated By/Date** - Oracle AI Lakehouse workshop team, November 2026
